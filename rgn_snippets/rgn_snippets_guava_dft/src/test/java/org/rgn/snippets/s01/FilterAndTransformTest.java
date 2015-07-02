@@ -68,11 +68,20 @@ public class FilterAndTransformTest {
 
         //names
         Collection<String> result = Collections2.filter(names, predicate);
-      
-      assertEquals(3, result.size());
-      assertThat(result, containsInAnyOrder("John", "Jane", "Adam"));
+
+        assertEquals(3, result.size());
+        assertThat(result, containsInAnyOrder("John", "Jane", "Adam"));
     }
-  
-  
+
+
+    @Test
+    public void whenRemoveNullFromCollection_thenRemoved() {
+
+        List<String> names = Lists.newArrayList("John", null, "Jane", null, "Adam", "Tom");
+
+        Collection<String> result = Collections2.filter(names, Predicates.notNull());
+
+        assertEquals(4, result.size());
+    }
 
 }
